@@ -1,7 +1,18 @@
-import screen from './touch/screen'
+import touch from './touch'
+import '../scss/index.scss'
+import sockIo from 'socket.io-client'
 
-const init = async () => {
-    await import('../scss/index.scss')
+const io = sockIo('ws://192.168.0.106')
 
+
+const touchbar = new touch(document.querySelector('.touchbar'))
+
+touchbar.onscreen = (e) => {
+    io.emit('touchbar', e)
 }
-init()
+
+const wheel = new touch(document.querySelector('.wheel'))
+
+wheel.onscreen = e => {
+    io.emit('wheel', e)
+}
