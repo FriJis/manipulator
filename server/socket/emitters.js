@@ -2,7 +2,8 @@ const { move, setCoordinateFromDelta } = require('../helpers')
 
 
 const onTouchbar = (e) => {
-    setCoordinateFromDelta('degZ', e.deltaY)
+    setCoordinateFromDelta('degZ', -e.deltaY)
+    setCoordinateFromDelta('degX', -e.deltaX)
     move()
 }
 
