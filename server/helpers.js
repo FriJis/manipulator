@@ -6,21 +6,24 @@ let coordinates = {
     degX: 90
 }
 
+const servosConfig = {
+    // center: true
+}
 
 let servoZ = undefined
 let servoY = undefined
 let servoX = undefined
 
 const setCoordinateFromDelta = (c, delta) => {
-    coordinates[c] += (delta / 10)
-    if(coordinates[c] <= 0) coordinates[c] = 0
-    if(coordinates[c] >= 180) coordinates[c] = 180
+    coordinates[c] += (delta / 5)
+    if (coordinates[c] <= 0) coordinates[c] = 0
+    if (coordinates[c] >= 180) coordinates[c] = 180
 }
 
 const init = () => {
-    servoZ = new Servo(2)
-    servoY = new Servo(3)
-    servoX = new Servo(4)
+    servoZ = new Servo({ pin: 2, ...servosConfig })
+    servoY = new Servo({ pin: 3, ...servosConfig })
+    servoX = new Servo({ pin: 4, ...servosConfig })
     move()
 }
 

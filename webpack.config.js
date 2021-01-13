@@ -1,28 +1,27 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: './src/js/index.js',
     output: {
-        publicPath: 'dist'
+        publicPath: '/'
     },
     plugins: [new MiniCssExtractPlugin({
         filename: 'main.css'
-    })],
+    }),
+    new Dotenv()],
     module: {
         rules: [
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    // Creates `style` nodes from JS strings
                     MiniCssExtractPlugin.loader,
-                    // Translates CSS into CommonJS
                     "css-loader",
-                    // Compiles Sass to CSS
                     "sass-loader",
                 ],
             },
             {
-                test: /\.(ttf|woff|woff|svg|eot|woff2)$/i,
+                test: /\.(ttf|woff|woff|svg|eot|woff2|jpg)$/i,
                 use: [
                     {
                         loader: 'file-loader',

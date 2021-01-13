@@ -3,15 +3,15 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 require('dotenv').config()
 const { Board, Servo } = require("johnny-five");
+const emitters = require('./server/emitters')
+const helpers = require('./server/helpers')
+
 const board = new Board({
     port: process.env.COM
 });
 
-const emitters = require('./server/socket/emitters')
-const helpers = require('./server/helpers')
 
-
-app.get(/\.(js|ttf|woff|woff|svg|eot|woff2|css)/, (req, res) => {
+app.get(/\.(js|ttf|woff|woff|svg|eot|woff2|css|jpg)/, (req, res) => {
     res.sendFile(`${__dirname}/dist/${req.url}`)
 })
 
@@ -24,8 +24,9 @@ board.on("ready", () => {
     helpers.init()
     io.on('connection', (socket) => {
         console.log('conn');
-        socket.on('touchbar', e => emitters.onTouchbar(e))
-        socket.on('wheel', e => emitters.onWheel(e))
+        Object.keys(emitters).forEach(emitter => {
+            socket.on(emitter, e => emitters[emitter](e))
+        })
     });
     http.listen(process.env.PORT, process.env.HOST, () => {
         console.log(`Сервер слушает порт ${process.env.port}`);

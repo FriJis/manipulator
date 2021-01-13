@@ -1,18 +1,18 @@
-const { move, setCoordinateFromDelta } = require('../helpers')
+const { move, setCoordinateFromDelta } = require('./helpers')
 
 
-const onTouchbar = (e) => {
+const touchbar = (e) => {
     setCoordinateFromDelta('degZ', -e.deltaY)
     setCoordinateFromDelta('degX', -e.deltaX)
     move()
 }
 
-const onWheel = (e) => {
+const wheel = (e) => {
     setCoordinateFromDelta('degY', -e.deltaY)
     move()
 }
 
 module.exports = {
-    onTouchbar,
-    onWheel
+    touchbar,
+    wheel
 }
