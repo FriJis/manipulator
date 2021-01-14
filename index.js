@@ -23,9 +23,9 @@ board.on("ready", () => {
     console.log("Ready!");
     helpers.init()
     io.on('connection', (socket) => {
-        console.log('conn');
+        console.log(`connected ${socket.id}`);
         Object.keys(emitters).forEach(emitter => {
-            socket.on(emitter, e => emitters[emitter](e))
+            socket.on(emitter, e => emitters[emitter]({io}, e))
         })
     });
     http.listen(process.env.PORT, process.env.HOST, () => {

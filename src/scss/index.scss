@@ -1,5 +1,9 @@
 @import "~font-awesome/css/font-awesome.min.css";
+@import "./statusBar.scss";
 
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 body {
     margin: 0;
     padding: 0;
@@ -19,12 +23,12 @@ body {
             bottom: 0px;
             left: 0px;
             right: 0px;
-            top: 30%;
+            top: 140px;
             border-radius: 20px;
             background: #273147;
             transform: scale(0.9);
             transition: 0.3s;
-            transition-property: border-radius transform border;
+            transition-property: border-radius, transform, border;
 
             &.active {
                 border: 2px dashed rgb(252 171 12 / 33%);
@@ -32,22 +36,30 @@ body {
                 border-radius: 0;
             }
         }
-
-        .wheel {
+        .manag {
             position: fixed;
-            width: 40px;
-            height: 140px;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 20px;
             border-radius: 59px;
             transition: 0.3s;
             background: rgba(252, 172, 12, 0.541);
-            transition-property: background transform;
+            transition-property: background, transform;
             &.active {
-            background: #fcab0c;
-            transform: translateY(-50%) scale(1.2);
+                background: #fcab0c;
+                transform: translate(-50%, -50%) scale(1.2);
             }
+        }
+        .wheel {
+            width: 40px;
+            height: 140px;
+            top: 50%;
+            right: 20px;
+            transform: translate(-50%, -50%);
+        }
+        .claw {
+            width: 140px;
+            height: 40px;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     }
 }

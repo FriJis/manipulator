@@ -1,0 +1,10 @@
+.status--bars {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    .status--bar {
+        height: 100px;
+        width: 100px;
+        
+    }
+}
